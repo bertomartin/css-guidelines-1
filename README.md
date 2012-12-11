@@ -32,7 +32,7 @@ Example:
 
 Categorizing
 ------------
-There are four types of categories where the styling rules belong:
+There are four types of categories in which all the styling rules belong:
 
 1. Base
 2. Layout
@@ -74,7 +74,7 @@ Only include a selector that includes semantics.
 Minimize the depth of applicability: The depth of applicability is the number of generations affected by a given rule. Minimize it to avoid too much dependency on a particular HTML structure, to improve maintenance, performance and readability.
 
 Use:
-* Class: The selector of choice. For performance reasons use class selectors as the right most selector.
+* Class: The selector of choice. For performance reasons use class selectors as the most right selector.
 * Child: Use child selectors to minimize the depth of applicability.
 
 Avoid:
