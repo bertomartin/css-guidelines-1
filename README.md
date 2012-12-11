@@ -2,7 +2,7 @@ css-style-guide
 ===============
 CSS best practices for GF inspired by SMACSS
 
-There are two core goals:
+In order to make CSS flexible, maintainable and fail-safe, the concept of SMACSS (Scalable and Modular Architecture for CSS) has two core goals:
 
 1. Increase the semantic value of a section of HTML and content
 2. Decrease the expectation of a specific HTML structure
@@ -14,17 +14,20 @@ Syntax
 * A Space before the opening bracket
 * A Space behind the colon
 * Color declarations in hex
-* Properties grouped by types: 1. Box, 2. Border, 3. Background, 4. Text, 5. Other separated by a blank line
+* Properties grouped by types, separated by blank lines: 1. Box, 2. Border, 3. Background, 4. Text, 5. Other 
 
 Example:
 
     .question {
+        /* Box properties */
         display: block;
         float: left;
         position: relative;
         
+        /* Border property */
         border: 1px solid #333;
         
+        /* Text properties */
         font-size: 12px;
         text-transform: uppercase;
     }
@@ -32,41 +35,64 @@ Example:
 
 Categorizing
 ------------
-There are four types of categories in which all the styling rules belong:
+There are four types of categories for a project where all the styling rules belong:
 
 1. Base
 2. Layout
 3. Module
 4. State
 
-Base rules: The defaults belong here. There should be only single element selectors that say that wherever the element is on the page, it should look like this.
+Base rules: The default styles belong here. There are only single element selectors that say: Wherever the element is on the page, it should look like this.
 
-Layout rules: The sections of a page holding one or more modules together.
+    body, form {
+        margin: 0;
+        padding: 0;
+    }
+    
+    a {
+        color: #309;
+    }
+    
+    a:hover {
+        color: #03F;
+    }
 
-Module rules: The modular and reusable parts of our design like lists or sidebar sections.
+Layout rules: The sections of a page holding one or more modules together. A layout style has only a single selector. This can be an ID for the general parts of the layout like footer, content, sidebar and footer. Other layout rules are prefixed with "l-":
 
-State rules: They describe the look of a module or layout in a particular state like hidden or expanded. The state rules indicate a JavaScript dependency.
+    /* fluid layout */
+    #content {
+        width: 80%;
+        float: left;
+    }
+    
+    #sidebar {
+        width: 20%;
+        float: right;
+    }
+    
+    /* fixed layout */
+    .l-fixed #article {
+        width: 600px;
+    }
+    
+    .l-fixed #sidebar {
+        width: 200px;
+    }   
 
-Naming Conventions
-------------------
-We want to know instantly just by its name what a selector is about und which category it belongs to:
-* Layouts: prefixed with "l-"
-* States: prefix layout and style names with "is-"
-* Modules: no prefix, but related elements and variations use their base modules name as prefix
-
-Examples:
+Module rules: The modular and reusable parts of our design like lists or sidebar sections. Module selectors are the bulk of any project, so they get no module-prefix, but sub-modules like related elements and variations get their base modules name as prefix:
 
     /* Example Module */
     .example { }
     
     /* Example Sub-Module */
     .example.example-negative { }
-    
+
+State rules: They describe the look of a module or layout in a particular state like hidden or expanded. The state rules indicate a JavaScript dependency. State rules get prefixed with "is-".
+
     /* Callout Module with State */
     .callout.is-collapsed { }
-    
-    /* Inline layout */
-    .l-inline { }
+
+We want to know instantly just by its name what a selector is about und which category it belongs to, so the selectors names MUST follow its categories naming convention.
 
 Selectors
 ---------
