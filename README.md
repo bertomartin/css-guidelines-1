@@ -1,5 +1,5 @@
-css-style-guide
-===============
+# css-style-guide #
+
 CSS best practices for GF inspired by SMACSS
 
 In order to make CSS flexible, maintainable and fail-safe, the concept of SMACSS (Scalable and Modular Architecture for CSS) has two core goals:
@@ -7,8 +7,8 @@ In order to make CSS flexible, maintainable and fail-safe, the concept of SMACSS
 1. Increase the semantic value of a section of HTML and content
 2. Decrease the expectation of a specific HTML structure
 
-Syntax
-------
+## Syntax ##
+
 * Indent: 4 spaces (no Tabs)
 * Opening bracket on the same line as the rule set
 * A Space before the opening bracket
@@ -33,16 +33,18 @@ Example:
     }
 
 
-Categorizing
-------------
-There are four types of categories for a project where all the styling rules belong:
+## Categorizing ##
+
+SMACSS introduces a directory structure of four types of categories for a project where all our styling rules belong:
 
 1. Base
 2. Layout
 3. Module
 4. State
 
-Base rules: The default styles belong here. There are only single element selectors that say: Wherever the element is on the page, it should look like this.
+### Base rules ###
+
+The default styles belong here. There are only single element selectors that say: Wherever the element is on the page, it should look like this.
 
     body, form {
         margin: 0;
@@ -57,7 +59,9 @@ Base rules: The default styles belong here. There are only single element select
         color: #03F;
     }
 
-Layout rules: The sections of a page holding one or more modules together. A layout style has only a single selector. This can be an ID for the general parts of the layout like footer, content, sidebar and footer. Other layout rules are prefixed with "l-":
+### Layout rules ###
+
+The sections of a page holding one or more modules together. A layout style has only a single selector. This can be an ID for the general parts of the layout like footer, content, sidebar and footer. Other layout rules are prefixed with "l-":
 
     /* fluid layout */
     #content {
@@ -79,7 +83,9 @@ Layout rules: The sections of a page holding one or more modules together. A lay
         width: 200px;
     }   
 
-Module rules: The modular and reusable parts of our design like lists or sidebar sections. Module selectors are the bulk of any project, so they get no module-prefix, but sub-modules like related elements and variations get their base modules name as prefix:
+### Module rules ###
+
+The modular and reusable parts of our design like lists or sidebar sections. Module selectors are the bulk of any project, so they get no module-prefix, but sub-modules like related elements and variations get their base modules name as prefix:
 
     /* Example Module */
     .example { }
@@ -87,15 +93,17 @@ Module rules: The modular and reusable parts of our design like lists or sidebar
     /* Example Sub-Module */
     .example.example-negative { }
 
-State rules: They describe the look of a module or layout in a particular state like hidden or expanded. The state rules indicate a JavaScript dependency. State rules get prefixed with "is-".
+### State rules ###
+
+They describe the look of a module or layout in a particular state like hidden or expanded. The state rules indicate a JavaScript dependency. State rules get prefixed with "is-".
 
     /* Callout Module with State */
     .callout.is-collapsed { }
 
 We want to know instantly just by its name what a selector is about und which category it belongs to, so the selectors names MUST follow its categories naming convention.
 
-Selectors
----------
+## Selectors ##
+
 Only include a selector that includes semantics.
 Minimize the depth of applicability: The depth of applicability is the number of generations affected by a given rule. Minimize it to avoid too much dependency on a particular HTML structure, to improve maintenance, performance and readability.
 
