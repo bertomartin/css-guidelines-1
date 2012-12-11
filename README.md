@@ -1,4 +1,4 @@
-# css-style-guide #
+# CSS-Guidelines #
 
 CSS best practices for GF inspired by SMACSS
 
