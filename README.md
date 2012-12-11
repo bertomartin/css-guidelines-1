@@ -16,7 +16,7 @@ Syntax
 * Color declarations in hex
 * Properties grouped by types: 1. Box, 2. Border, 3. Background, 4. Text, 5. Other separated by a blank line
 
-Bsp:
+Example:
 
     .question {
         display: block;
@@ -32,12 +32,20 @@ Bsp:
 
 Categorizing
 ------------
-There are four types of categories:
+There are four types of categories where the styling rules belong:
 
-1. Base: the defaults
-2. Layout: the sections of a page holding modules
-3. Module: the modular and reusable parts 
-4. State: different states of modules and layouts. Indicate a JavaScript dependency.
+1. Base
+2. Layout
+3. Module
+4. State
+
+Base rules: The defaults belong here. There should be only single element selectors that say that wherever the element is on the page, it should look like this.
+
+Layout rules: The sections of a page holding one or more modules together.
+
+Module rules: The modular and reusable parts of our design like lists or sidebar sections.
+
+State rules: They describe the look of a module or layout in a particular state like hidden or expanded. The state rules indicate a JavaScript dependency.
 
 Naming Conventions
 ------------------
@@ -45,6 +53,20 @@ We want to know instantly just by its name what a selector is about und which ca
 * Layouts: prefixed with "l-"
 * States: prefix layout and style names with "is-"
 * Modules: no prefix, but related elements and variations use their base modules name as prefix
+
+Examples:
+
+    /* Example Module */
+    .example { }
+    
+    /* Example Sub-Module */
+    .example.example-negative { }
+    
+    /* Callout Module with State */
+    .callout.is-collapsed { }
+    
+    /* Inline layout */
+    .l-inline { }
 
 Selectors
 ---------
