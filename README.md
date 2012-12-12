@@ -14,20 +14,20 @@ In order to make CSS flexible, maintainable and fail-safe, the concept of SMACSS
 * A Space before the opening bracket
 * A Space behind the colon
 * Color declarations in hex
+* Use short syntax where possible
+* Zero-values have no unit
 * Properties grouped by types, separated by blank lines: 1. Box, 2. Border, 3. Background, 4. Text, 5. Other 
 
 Example:
 
     .question {
-        /* Box properties */
         display: block;
         float: left;
         position: relative;
+        margin: 0;
         
-        /* Border property */
         border: 1px solid #333;
         
-        /* Text properties */
         font-size: 12px;
         text-transform: uppercase;
     }
@@ -35,7 +35,7 @@ Example:
 
 ## Categorizing ##
 
-SMACSS introduces a directory structure of four types of categories for a project. Any styling rule belongs into one of these categories:
+SMACSS introduces four types of categories for a project. Any styling rule belongs to one of these categories:
 
 1. Base
 2. Layout
@@ -44,7 +44,7 @@ SMACSS introduces a directory structure of four types of categories for a projec
 
 ### Base rules ###
 
-The base category is about the default styles. There are only single element selectors that say: Wherever the element is on the page, it should look like this.
+The base category is about the default styles. There are only single element selectors (and their pseudo-elements) that say: Wherever the element is on the page, it should look like this.
 
     body, form {
         margin: 0;
@@ -95,10 +95,17 @@ Into the module category belong all modular and reusable parts of our design lik
 
 ### State rules ###
 
-Rules in the state category describe the look of a module or layout in a particular state like when it's hidden or expanded. The state rules indicate a JavaScript dependency. They get prefixed with "is-".
+There are two kinds of state rules: Global states and module states.
 
-    /* Callout Module with State */
-    .callout.is-collapsed { }
+Global states describe the look of modules or layouts in a particular state like when it's hidden or expanded. The state rules indicate a JavaScript dependency. They get prefixed with "is-". They have a single class selector, so it might be necessary to use !important here to override other more complex rule sets.
+
+Module states are for a specific state for a particular module. The state class name should include the module name in it. The state rule should also reside with the module rules and not with the rest of the global state rules.
+
+    /* Navigation Module with global state */
+    .navigation.is-collapsed { }
+    
+    /* Navigation Module with specific state */
+    .is-navigation-active
 
 We want to know instantly just by its name what a selector is about und which category it belongs to, so the selectors names MUST follow its categories naming conventions.
 
@@ -143,14 +150,44 @@ bad:
     
 good:
 
-    .pod {
+    .box {
         border: 1px solid #333;
     }
     
-    .pod > h3 {
+    .box > h3 {
         margin-top: 5px;
     }
     
-    .pod > ul {
+    .box > ul {
         margin-bottom: 5px;
     }
+
+## !important ##
+
+The use of !important should be avoided. It breaks our cascade, inheritance and specificity order and leads into a maintenance nightmare.
+
+(The only possible exception where the use of !important could be appropriate is in state rules - see above)
+
+## File Organization ##
+
+* Place all Base rules into their own file
+* Depending on the type of layouts you have, either place all of them into a single file or major layouts into separate files.
+* Put each module into its own file.
+* Depending on size of project, place sub-modules into their own file.
+* Place global states into their own file.
+* Place layout and module states into the module files
+
+A sample directory structure (using SASS):
+
+    +-layout/
+    | +-grid.scss
+    | +-alternate.scss
+    +-module/
+    | +-callout.scss
+    | +-bookmarks.scss
+    | +-button.scss
+    | +-button-compose.scss
+    +-base.scss
+    +-states.scss
+    +-site-settings.scss
+    +-mixins.scss
