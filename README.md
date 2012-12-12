@@ -106,10 +106,13 @@ We want to know instantly just by its name what a selector is about und which ca
 
 Only use a selector that includes semantics.
 Minimize the depth of applicability: The depth of applicability is the number of generations affected by a given rule: For example
+
     body.article > #main > #content > #intro > p > b
 has a depth of applicability of 6 generations.
+
     .article #intro b
 looks shorter, but based on the same HTML-structure as above it still has 6 generations - It has a big dependency on this particular HTML-structure. One of our goals is to decrease the expectation of a specific HTML structure, so a better solution would be to rename the #intro:
+
     .article-intro b
 This reduces the depth of applicability to the half.
 
